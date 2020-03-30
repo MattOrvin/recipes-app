@@ -25,9 +25,8 @@ class CardContainer extends React.Component {
     render(){
         return(
             <div>
-                <p>Card Container</p>
                 <SearchBar />
-                <RecipeCard />
+                <RecipeCard name={"Bernie Sanders"}/>
             </div>
         )
     }
