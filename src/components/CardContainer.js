@@ -1,24 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import RecipeCard from './RecipeCard'
 import SearchBar from './SearchBar'
 
-class CardContainer extends Component {
+class CardContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            RecipeCategories: ""
+            recipeCategories: []
         }
     }
    
     componentDidMount(){
         fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
-            .then(response => response.json())
-            .then(data => this.setState({
-                    RecipeCategories: data
-                })
+            .then(resp => resp.json())
+            .then(recipeData => {
+                    this.setState({recipeCategories: recipeData})
+                }
             )
-        console.log(this.state.RecipeCategories)
     }
+    
+    // Goal: the user should be able to see a list of recipie categories
+
 
     render(){
         return(
@@ -30,7 +32,6 @@ class CardContainer extends Component {
         )
     }
 }
-
 
 
 export default CardContainer

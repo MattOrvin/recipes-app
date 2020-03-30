@@ -1,9 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './Header.js'
-import CardContainer from './CardContainer.js'
-import SearchBar from './SearchBar.js'
+import Header from './components/Header.js/index.js'
+import CardContainer from './components/CardContainer.js/index.js'
 
 function App() {
   return (

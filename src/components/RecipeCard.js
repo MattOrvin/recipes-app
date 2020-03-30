@@ -1,9 +1,10 @@
 import React from 'react'
 
-function RecipeCard(){
+function RecipeCard(props){
     return(
         <div>
             <p>Recipe Card</p>
+            <p></p>
         </div>
     )
 }
