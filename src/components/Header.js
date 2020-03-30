@@ -2,7 +2,9 @@ import React from 'react'
 
 function Header(){
     return(
-        <h1>Recipe Guru</h1>
+        <div className="jumbotron">
+            <h1>Recipe Guru</h1>
+        </div>
     )
 }
 
