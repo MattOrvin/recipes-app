@@ -26,7 +26,10 @@ class CardContainer extends React.Component {
         return(
             <div>
                 <SearchBar />
-                <RecipeCard name={"Bernie Sanders"}/>
+                <RecipeCard 
+                    key={this.state.recipeCategories.idCategory}
+                    category={this.state.recipeCategories.categories}
+                />
             </div>
         )
     }

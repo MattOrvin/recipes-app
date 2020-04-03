@@ -1,13 +1,13 @@
 import React from 'react'
 
 function RecipeCard(props){
+    // const mappedCategories = {props.category.map}
+
     return(
         <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">{props.name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">bernie@bernie2020.com</h6>
-              <p className="card-text">Not me, us</p>
-            </div>
+                {/* {props.category.forEach((foodCategory) => {
+                    return(<h3>{foodCategory.strCategory}</h3>)
+                })} */}
         </div>
     )
 }
