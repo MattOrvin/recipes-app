@@ -1,5 +1,5 @@
 import React from 'react'
-import RecipeCard from './RecipeCard'
+import CategoryCard from './CategoryCard'
 import SearchBar from './SearchBar'
 
 class CardContainer extends React.Component {
@@ -26,14 +26,20 @@ class CardContainer extends React.Component {
         return(
             <div>
                 <SearchBar />
-                <RecipeCard 
-                    key={this.state.recipeCategories.idCategory}
-                    category={this.state.recipeCategories.categories}
-                />
+                {this.state.recipeCategories.forEach(category => (
+                    <div className="card" key={this.state.recipeCategories.idCategory}>{category.strCategory}</div>
+                ))}
             </div>
-        )
-    }
+            )
+        }
 }
+
+// {this.state.recipeCategories.map(category => (
+//     <CategoryCard key={this.state.recipeCategories.idCategory}><h3>{category.strCategory}</h3></CategoryCard>
+// )}
+
+// key={this.state.recipeCategories.idCategory}
+// category={this.state.recipeCategories.categories}/
 
 
 export default CardContainer
