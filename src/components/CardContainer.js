@@ -13,30 +13,23 @@ class CardContainer extends React.Component {
     componentDidMount(){
         fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
             .then(resp => resp.json())
-            .then(recipeData => {
-                    this.setState({recipeCategories: recipeData})
+            .then(categoryData => {
+                    this.setState({recipeCategories: categoryData.categories})
                 }
             )
     }
-    
-    // Goal: the user should be able to see a list of recipie categories
-
 
     render(){
         return(
             <div>
                 <SearchBar />
-                {this.state.recipeCategories.forEach(category => (
-                    <div className="card" key={this.state.recipeCategories.idCategory}>{category.strCategory}</div>
+                {this.state.recipeCategories.map(category => (
+                        <CategoryCard key={category.idCategory} category={category.strCategory}/>
                 ))}
             </div>
             )
         }
 }
-
-// {this.state.recipeCategories.map(category => (
-//     <CategoryCard key={this.state.recipeCategories.idCategory}><h3>{category.strCategory}</h3></CategoryCard>
-// )}
 
 // key={this.state.recipeCategories.idCategory}
 // category={this.state.recipeCategories.categories}/
