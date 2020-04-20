@@ -19,20 +19,24 @@ class CardContainer extends React.Component {
             )
     }
 
+    handleClick = (event) => {
+        event.preventDefault()
+        console.log(event.target)
+    }
+
     render(){
         return(
             <div>
                 <SearchBar />
                 {this.state.recipeCategories.map(category => (
-                        <CategoryCard key={category.idCategory} category={category.strCategory}/>
+                        <CategoryCard 
+                            key={category.idCategory} 
+                            category={category.strCategory} 
+                            handleClick={this.handleClick}/>
                 ))}
             </div>
             )
         }
 }
-
-// key={this.state.recipeCategories.idCategory}
-// category={this.state.recipeCategories.categories}/
-
 
 export default CardContainer
