@@ -20,18 +20,10 @@ class CardContainer extends React.Component {
             )
     }
 
-    handleClick = (event) => {
-        event.preventDefault()
-        console.log(event.target)
-        console.log(this.state.recipeCategories)
-
-        // ALL of the recipe categories currently exist in the state once the page loads
-        // we need to map through the recipe categories in the state and only return the on whose id (or name?)
-        // matches that of the one which was clicked on (this is the text in the CategoryCard component)
-
+    handleClick = (key) => {
         this.setState({
             recipeCategories: [],
-            currentCategory: event.target
+            currentCategory: key
         })
         
         // the state will be updated with recipeCategories being reset to only the currentCategory
@@ -49,12 +41,13 @@ class CardContainer extends React.Component {
                         <CategoryCard 
                             key={category.idCategory} 
                             category={category.strCategory} 
-                            handleClick={this.handleClick}/>
+                            handleClick={() => this.handleClick(category.strCategory)}/>
                 ))}
-                {/* {this.state.currentCategory !== null ? <h3>{this.state.currentCategory.value} recipes</h3> : null} */}
+                {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
             </div>
             )
         }
 }
 
 export default CardContainer
+
