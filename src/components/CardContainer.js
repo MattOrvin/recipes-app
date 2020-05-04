@@ -1,13 +1,15 @@
 import React from 'react'
 import CategoryCard from './CategoryCard'
 import SearchBar from './SearchBar'
+// import BackButton from './BackButton'
 
 class CardContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             recipeCategories: [],
-            currentCategory: ""
+            currentCategory: "",
+            currentRecipes: ""
         }
     }
    
@@ -20,18 +22,29 @@ class CardContainer extends React.Component {
             )
     }
 
-    handleClick = (key) => {
+    handleClick = (categoryName) => {
         this.setState({
             recipeCategories: [],
-            currentCategory: key
+            currentCategory: categoryName
         })
-        
-        // the state will be updated with recipeCategories being reset to only the currentCategory
-        // the state will have a currentCategory key which will then be updated with whatever was clicked on
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+            .then(resp => resp.json())
+            .then(data => {
+                this.setState({currentRecipes: data.meals})
+            })
         // onClick is going to have another fetch to the api with all of the recipes for that category
         // that data will get returned and be used to populate cards which show previews of the recipes
         // users can then click on those cards to see more detail
     }
+
+    // goBack = () => {
+    //     console.log("go back")
+    //     this.setState(prevState => ({
+    //         recipeCategories: prevState.categories,
+    //         currentCategory: prevState.currentCategory
+    //     }))
+    // }
+
 
     render(){
         return(
@@ -51,3 +64,5 @@ class CardContainer extends React.Component {
 
 export default CardContainer
 
+// {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
+// {this.state.currentCategory !== null ? <BackButton goBack={() => this.goBack()}/> : null}
