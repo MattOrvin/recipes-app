@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoryCard from './CategoryCard'
 import SearchBar from './SearchBar'
-// import BackButton from './BackButton'
+import MealCard from './MealCard'
 
 class CardContainer extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class CardContainer extends React.Component {
         this.state = {
             recipeCategories: [],
             currentCategory: "",
-            currentRecipes: ""
+            currentMeals: []
         }
     }
    
@@ -30,21 +30,12 @@ class CardContainer extends React.Component {
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
             .then(resp => resp.json())
             .then(data => {
-                this.setState({currentRecipes: data.meals})
+                console.log(data.meals)
+                this.setState({currentMeals: data.meals})
             })
-        // onClick is going to have another fetch to the api with all of the recipes for that category
-        // that data will get returned and be used to populate cards which show previews of the recipes
-        // users can then click on those cards to see more detail
+        // users can then click on the meal cards to see more detail about the recipes
+        // this may require another fetch
     }
-
-    // goBack = () => {
-    //     console.log("go back")
-    //     this.setState(prevState => ({
-    //         recipeCategories: prevState.categories,
-    //         currentCategory: prevState.currentCategory
-    //     }))
-    // }
-
 
     render(){
         return(
@@ -57,6 +48,13 @@ class CardContainer extends React.Component {
                             handleClick={() => this.handleClick(category.strCategory)}/>
                 ))}
                 {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
+                {<br />}
+                {this.state.currentMeals !== null ? this.state.currentMeals.map(meal =>(
+                    <MealCard 
+                        key={meal.idMeal}
+                        category={meal.strMeal}
+                    /> 
+                )): null}
             </div>
             )
         }
@@ -66,3 +64,11 @@ export default CardContainer
 
 // {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
 // {this.state.currentCategory !== null ? <BackButton goBack={() => this.goBack()}/> : null}
+
+  // goBack = () => {
+    //     console.log("go back")
+    //     this.setState(prevState => ({
+    //         recipeCategories: prevState.categories,
+    //         currentCategory: prevState.currentCategory
+    //     }))
+    // }

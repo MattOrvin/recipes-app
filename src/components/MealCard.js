@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CategoryCard(props){
+function MealCard(props){
 
     return(
         <div className="card" onClick={props.handleClick}>
@@ -9,4 +9,4 @@ function CategoryCard(props){
     )
 }
 
-export default CategoryCard
+export default MealCard
