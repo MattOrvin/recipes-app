@@ -37,6 +37,19 @@ class CardContainer extends React.Component {
         // this may require another fetch
     }
 
+    goBack = () => {
+        fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+            .then(resp => resp.json())
+            .then(categoryData => {
+                    this.setState({
+                        recipeCategories: categoryData.categories,
+                        currentCategory: "",
+                        currentMeals: []
+                    })
+                }
+            )
+    }
+
     render(){
         return(
             <div>
@@ -47,12 +60,15 @@ class CardContainer extends React.Component {
                             category={category.strCategory} 
                             handleClick={() => this.handleClick(category.strCategory)}/>
                 ))}
-                {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
+                {this.state.currentCategory !== "" ? <h3>{this.state.currentCategory} recipes</h3> : null}
+                {this.state.currentCategory !== "" ? <button onClick={this.goBack}>Back</button> : null}
+                {<br />}
                 {<br />}
                 {this.state.currentMeals !== null ? this.state.currentMeals.map(meal =>(
                     <MealCard 
                         key={meal.idMeal}
-                        category={meal.strMeal}
+                        name={meal.strMeal}
+                        pic={meal.strMealThumb}
                     /> 
                 )): null}
             </div>
@@ -61,14 +77,3 @@ class CardContainer extends React.Component {
 }
 
 export default CardContainer
-
-// {this.state.currentCategory !== null ? <h3>{this.state.currentCategory} recipes</h3> : null}
-// {this.state.currentCategory !== null ? <BackButton goBack={() => this.goBack()}/> : null}
-
-  // goBack = () => {
-    //     console.log("go back")
-    //     this.setState(prevState => ({
-    //         recipeCategories: prevState.categories,
-    //         currentCategory: prevState.currentCategory
-    //     }))
-    // }
