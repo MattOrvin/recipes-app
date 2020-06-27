@@ -37,19 +37,6 @@ class CardContainer extends React.Component {
         // this may require another fetch
     }
 
-    goBack = () => {
-        fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
-            .then(resp => resp.json())
-            .then(categoryData => {
-                    this.setState({
-                        recipeCategories: categoryData.categories,
-                        currentCategory: "",
-                        currentMeals: []
-                    })
-                }
-            )
-    }
-
     render(){
         return(
             <div>
@@ -61,7 +48,6 @@ class CardContainer extends React.Component {
                             handleClick={() => this.handleClick(category.strCategory)}/>
                 ))}
                 {this.state.currentCategory !== "" ? <h3>{this.state.currentCategory} recipes</h3> : null}
-                {this.state.currentCategory !== "" ? <button onClick={this.goBack}>Back</button> : null}
                 {<br />}
                 {<br />}
                 {this.state.currentMeals !== null ? this.state.currentMeals.map(meal =>(

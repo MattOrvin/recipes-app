@@ -1,14 +1,27 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header.js'
-import CardContainer from './components/CardContainer.js'
+import Header from './components/Header.js';
+import Home from './components/Home';
+import CardContainer from './components/CardContainer.js';
+import About from './components/About.js';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
+import Categories from './components/Categories';
+import CategoryDetail from './components/CategoryDetail'
+import Meals from './components/Meals'
 
 function App() {
   return (
-    <div>
-      <Header />
-      <CardContainer />
-    </div>
+    <Router >
+      <div>
+        <Header />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/categories" exact component={Categories}/>
+            <Route path="/categories/:id" component={CategoryDetail}/>
+          </Switch>
+      </div>
+    </Router>
   );
 }
 
