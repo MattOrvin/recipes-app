@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 function Categories(){
@@ -9,11 +9,10 @@ function Categories(){
 
     const [categories, setCategories] = useState([]);
 
-    const fetchCategories = async () =>{
+    const fetchCategories = async () => {
         const data = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
         const categories = await data.json()
         setCategories(categories.categories)
-        console.log(categories.categories)
     }
 
     return(

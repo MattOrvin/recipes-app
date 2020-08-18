@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import Home from './components/Home';
-import CardContainer from './components/CardContainer.js';
+// import CardContainer from './components/CardContainer.js';
 import About from './components/About.js';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
 import Categories from './components/Categories';
-import CategoryDetail from './components/CategoryDetail'
-import Meals from './components/Meals'
+import CategoryMeals from './components/CategoryMeals'
+import MealDetail from './components/MealDetail'
+// import SearchBar from './components/SearchBar'
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
-            <Route path="/categories" exact component={Categories}/>
-            <Route path="/categories/:id" component={CategoryDetail}/>
+            <Route path="/categories" exact component={Categories} />
+            {/* <Route path="/search-results" component={} /> */}
+            <Route path="/categories/:id" exact component={CategoryMeals} />
+            <Route path="/categories/:id/:meal" component={MealDetail} />
           </Switch>
       </div>
     </Router>
