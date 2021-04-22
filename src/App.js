@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import Home from './components/Home';
@@ -9,19 +9,29 @@ import Categories from './components/Categories';
 import CategoryMeals from './components/CategoryMeals'
 import MealDetail from './components/MealDetail'
 // import SearchBar from './components/SearchBar'
+import Pic from './components/Pic.js'
 
 function App() {
+
+  const [savedRecipes, setSavedRecipes] = useState([{id: "52952", name: "Beef Lo Mein", category: "Beef"}, {id:"52831", name:"Chicken Kaarage", category: "Chicken"}])
+  // console.log(savedRecipes)
+
+  // useEffect(() => {
+  //   setSavedRecipes(["Beef Lo Mein", "Tandoori chicken"])
+  // })
+
   return (
     <Router >
       <div>
         <Header />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/about" component={About} />
+            <Route path="/about" render={()=> <About savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes}/>} />
             <Route path="/categories" exact component={Categories} />
             {/* <Route path="/search-results" component={} /> */}
             <Route path="/categories/:id" exact component={CategoryMeals} />
-            <Route path="/categories/:id/:meal" component={MealDetail} />
+            {/* <Route path="/categories/:id/:meal" component={MealDetail} /> */}
+            <Route path="/categories/:id/:meal" render={(props)=> <MealDetail savedRecipes={savedRecipes} setSavedRecipes={setSavedRecipes} {...props} />} />
           </Switch>
       </div>
     </Router>

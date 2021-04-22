@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function MealDetail( {match}){
-
+function MealDetail( {match, setSavedRecipes, savedRecipes}){
+    
     useEffect(()=> {
         fetchMealInfo()
     }, [])
@@ -13,17 +14,27 @@ function MealDetail( {match}){
         const mealInfo = await fetchMealInfo.json()
         setMealInfo(mealInfo.meals[0])
         console.log(mealInfo.meals[0])
+        console.log(savedRecipes)
     }
+    
 
+    const handleSaveRecipe = () => {
+        setSavedRecipes([...savedRecipes, {id: mealInfo.idMeal, name: mealInfo.strMeal, category: mealInfo.strCategory}])
+        console.log(mealInfo.idMeal)
+    }
+    // const [savedRecipes, setSavedRecipes] = useState()
+    
     // Consider making ingredients into their own child component with mealInfo passed down as props
+    // console.log(mealInfo.strMeal, mealInfo.idMeal, mealInfo.strCategory)
+    // setSavedRecipes(match.params.meal)
 
     return(
-        <div>
-            <h3>{mealInfo.strMeal}</h3>
+        <div style={{textAlign: 'center'}}>
+            <h3 style={{textAlign: 'center'}}>{mealInfo.strMeal}</h3>
             <img src={mealInfo.strMealThumb} height="500" width="500"/>
             <br />
             <br />
-            <button onClick={() => console.log(mealInfo.strMeal, mealInfo.idMeal, mealInfo.strMealThumb)}>Save</button>
+            <button onClick={handleSaveRecipe}>Save</button>
             <br />
             {/* The onClick above will be a fetch post of the meal name and picture to our rails backend */}
             <p>{mealInfo.strMeasure1} {mealInfo.strIngredient1}</p>

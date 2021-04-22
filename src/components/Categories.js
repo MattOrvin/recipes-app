@@ -16,7 +16,7 @@ function Categories(){
     }
 
     return(
-        <div>
+        <div style={{textAlign: 'center'}}>
             <h1>Categories</h1>
             {categories.map(category => (
                 <h3 key={category.idCategory}>

@@ -13,10 +13,11 @@ function CategoryMeals({ match }){
         const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${match.params.id}`)
         const meals = await data.json()
         setMeals(meals.meals)
+        console.log(meals.meals)
     }
 
     return(
-        <div>
+        <div style={{textAlign: 'center'}}>
             <h1>{match.params.id} Recipes</h1>
             {meals !== null ? meals.map(meal => (
                 // instead of just an h3, consider making a meal preview child component w/picture; pass state to props here
